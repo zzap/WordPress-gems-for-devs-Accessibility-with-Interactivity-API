@@ -1,0 +1,13 @@
+# wp-env files
+/.wp-env.home.json
+/.wp-env.override.json
+
+# WordPress core (wp-env installs this)
+/wordpress/
+
+# Node modules at root level (if any)
+/node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
