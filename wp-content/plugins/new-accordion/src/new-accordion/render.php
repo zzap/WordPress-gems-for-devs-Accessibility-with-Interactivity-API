@@ -22,10 +22,18 @@ wp_interactivity_state(
 $context = array();
 ?>
 
-<div
-	<?php echo get_block_wrapper_attributes(); ?>
+<div 
+	<?php echo get_block_wrapper_attributes(); ?> 
 	data-wp-interactive="gems"
 	<?php echo wp_interactivity_data_wp_context( $context ); ?>
 >
-
+	<div class="accordion-item">
+		<button class="accordion-header">
+			<span>Accordion Item</span>
+			<span class="accordion-button">+</span>
+		</button>
+		<div id="accordion-content-0" class="accordion-content">
+			<div>This is the content of the first accordion item.</div>
+		</div>
+	</div>
 </div>
