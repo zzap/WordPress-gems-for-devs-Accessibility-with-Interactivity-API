@@ -10,6 +10,8 @@
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
 
+$title   = $attributes['title'] ?? __( 'Accordion title', 'new-accordion' );
+$content = $attributes['content'] ?? __( 'Accordion content', 'new-accordion' );
 // Generates a unique id for aria-controls.
 $unique_id = wp_unique_id( 'p-' );
 
@@ -29,11 +31,11 @@ $context = array();
 >
 	<div class="accordion-item">
 		<button class="accordion-header">
-			<span>Accordion Item</span>
+			<span><?php echo wp_kses_post( $title ); ?></span>
 			<span class="accordion-button">+</span>
 		</button>
 		<div id="accordion-content-0" class="accordion-content">
-			<div>This is the content of the first accordion item.</div>
+			<p><?php echo wp_kses_post( $content ); ?></p>
 		</div>
 	</div>
 </div>
