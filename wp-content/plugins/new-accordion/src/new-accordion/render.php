@@ -36,16 +36,20 @@ $context = array(
 	<?php echo wp_interactivity_data_wp_context( $context ); ?>
 >
 	<div class="accordion-item">
-		<button 
-			id="<?php echo esc_attr( $accordion_id ); ?>-button"
-			class="accordion-button"
-			arria-controls="<?php echo esc_attr( $accordion_id ); ?>-content"
-			data-wp-on--click="actions.toggleAccordion"
-			data-wp-bind--aria-expanded="context.isCurrentOpen"
-		>
-			<span><?php echo wp_kses_post( $title ); ?></span>
-			<span aria-hidden="true" data-wp-text="state.currentButton"></span>
-		</button>
+		<h3>
+			<button 
+				id="<?php echo esc_attr( $accordion_id ); ?>-button"
+				class="accordion-button"
+				arria-controls="<?php echo esc_attr( $accordion_id ); ?>-content"
+				data-wp-on--click="actions.toggleAccordion"
+				data-wp-bind--aria-expanded="context.isCurrentOpen"
+			>
+				<span>
+					<?php echo wp_kses_post( $title ); ?>
+					<span aria-hidden="true" data-wp-text="state.currentButton"></span>			
+				</span>
+			</button>
+		</h3>
 		<div 
 			id="<?php echo esc_attr( $accordion_id ); ?>-content" 
 			class="accordion-content"
