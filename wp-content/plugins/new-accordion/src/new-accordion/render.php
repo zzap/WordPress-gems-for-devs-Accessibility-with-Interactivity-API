@@ -13,7 +13,7 @@
 $title   = $attributes['title'] ?? __( 'Accordion title', 'new-accordion' );
 $content = $attributes['content'] ?? __( 'Accordion content', 'new-accordion' );
 // Generates a unique id for aria-controls.
-$unique_id = wp_unique_id( 'p-' );
+$accordion_id = wp_unique_id( 'accordion' );
 
 // Adds the global state.
 wp_interactivity_state(
@@ -30,11 +30,19 @@ $context = array();
 	<?php echo wp_interactivity_data_wp_context( $context ); ?>
 >
 	<div class="accordion-item">
-		<button class="accordion-header">
+		<button 
+			id="<?php echo esc_attr( $accordion_id ); ?>-button"
+			class="accordion-button"
+			arria-controls="<?php echo esc_attr( $accordion_id ); ?>-content"
+		>
 			<span><?php echo wp_kses_post( $title ); ?></span>
-			<span class="accordion-button">+</span>
+			<span>+</span>
 		</button>
-		<div id="accordion-content-0" class="accordion-content">
+		<div 
+			id="<?php echo esc_attr( $accordion_id ); ?>-content" 
+			class="accordion-content"
+			aria-labelledby="<?php echo esc_attr( $accordion_id ); ?>-button"
+		>
 			<p><?php echo wp_kses_post( $content ); ?></p>
 		</div>
 	</div>
