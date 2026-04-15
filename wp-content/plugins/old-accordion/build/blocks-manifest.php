@@ -1,0 +1,36 @@
+<?php
+// This file is generated. Do not modify it manually.
+return array(
+	'old-accordion' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/old-accordion',
+		'version' => '0.1.0',
+		'title' => 'Old accordion',
+		'category' => 'widgets',
+		'icon' => 'list-view',
+		'description' => 'An accordion block with old-fashioned JavaScript and HTML.',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'items' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'title' => 'Accordion Item 1',
+						'content' => 'This is the content of the first accordion item.'
+					)
+				)
+			)
+		),
+		'textdomain' => 'old-accordion',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js'
+	)
+);
