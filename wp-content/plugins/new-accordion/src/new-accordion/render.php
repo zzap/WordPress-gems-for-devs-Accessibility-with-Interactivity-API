@@ -18,10 +18,16 @@ $accordion_id = wp_unique_id( 'accordion' );
 // Adds the global state.
 wp_interactivity_state(
 	'gems',
-	array()
+	array(
+		'currentButton'         => "+",
+		'accordionButtonOpened' => "-",
+		'accordionButtonClosed' => "+",
+	)
 );
 
-$context = array();
+$context = array(
+	'isCurrentOpen' => false,
+);
 ?>
 
 <div 
@@ -34,14 +40,17 @@ $context = array();
 			id="<?php echo esc_attr( $accordion_id ); ?>-button"
 			class="accordion-button"
 			arria-controls="<?php echo esc_attr( $accordion_id ); ?>-content"
+			data-wp-on--click="actions.toggleAccordion"
+			data-wp-bind--aria-expanded="context.isCurrentOpen"
 		>
 			<span><?php echo wp_kses_post( $title ); ?></span>
-			<span>+</span>
+			<span aria-hidden="true" data-wp-text="state.currentButton"></span>
 		</button>
 		<div 
 			id="<?php echo esc_attr( $accordion_id ); ?>-content" 
 			class="accordion-content"
 			aria-labelledby="<?php echo esc_attr( $accordion_id ); ?>-button"
+			data-wp-bind--hidden="!context.isCurrentOpen"
 		>
 			<p><?php echo wp_kses_post( $content ); ?></p>
 		</div>
