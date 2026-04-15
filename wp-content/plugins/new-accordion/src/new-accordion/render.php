@@ -40,9 +40,10 @@ $context = array(
 			<button 
 				id="<?php echo esc_attr( $accordion_id ); ?>-button"
 				class="accordion-button"
-				arria-controls="<?php echo esc_attr( $accordion_id ); ?>-content"
+				aria-controls="<?php echo esc_attr( $accordion_id ); ?>-content"
 				data-wp-on--click="actions.toggleAccordion"
 				data-wp-bind--aria-expanded="context.isCurrentOpen"
+				data-wp-on--keydown="actions.handleKeyDown"
 			>
 				<span>
 					<?php echo wp_kses_post( $title ); ?>
