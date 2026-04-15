@@ -26,19 +26,23 @@ const { state } = store('gems', {
 			const buttons = Array.from(
 				document.querySelectorAll('.wp-block-gems-new-accordion .accordion-button')
 			);
+			const currentButton = event.currentTarget;
 
 			if (!buttons.length) {
 				return;
 			}
 
 			const lastIndex = buttons.length - 1;
+			const currentIndex = buttons.indexOf(currentButton);
 
 			const targetIndex = {
 				Home: 0,
 				End: lastIndex,
+				ArrowDown: (currentIndex + 1) % buttons.length,
+				ArrowUp: (currentIndex - 1 + buttons.length) % buttons.length,
 			}[event.key];
 
-			if (targetIndex === undefined) {
+			if (targetIndex === undefined || currentIndex === -1) {
 				return;
 			}
 
