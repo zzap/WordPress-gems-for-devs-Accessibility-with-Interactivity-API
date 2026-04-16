@@ -19,6 +19,7 @@ $accordion_id = wp_unique_id( 'accordion' );
 wp_interactivity_state(
 	'gems',
 	array(
+		'openAccordionID'       => null,
 		'currentButton'         => "+",
 		'accordionButtonOpened' => "-",
 		'accordionButtonClosed' => "+",
@@ -26,7 +27,7 @@ wp_interactivity_state(
 );
 
 $context = array(
-	'isCurrentOpen' => false,
+	'currentAccordionID' => $accordion_id,
 );
 ?>
 
@@ -42,7 +43,7 @@ $context = array(
 				class="accordion-button"
 				aria-controls="<?php echo esc_attr( $accordion_id ); ?>-content"
 				data-wp-on--click="actions.toggleAccordion"
-				data-wp-bind--aria-expanded="context.isCurrentOpen"
+				data-wp-bind--aria-expanded="state.isCurrentOpen"
 				data-wp-on--keydown="actions.handleKeyDown"
 			>
 				<span>
@@ -55,7 +56,7 @@ $context = array(
 			id="<?php echo esc_attr( $accordion_id ); ?>-content" 
 			class="accordion-content"
 			aria-labelledby="<?php echo esc_attr( $accordion_id ); ?>-button"
-			data-wp-bind--hidden="!context.isCurrentOpen"
+			data-wp-bind--hidden="!state.isCurrentOpen"
 		>
 			<p><?php echo wp_kses_post( $content ); ?></p>
 		</div>

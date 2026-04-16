@@ -6,15 +6,18 @@ import { store, getContext, withSyncEvent } from '@wordpress/interactivity';
 const { state } = store('gems', {
 	state: {
 		get currentButton() {
-			const context = getContext();
-			return context.isCurrentOpen ? state.accordionButtonOpened : state.accordionButtonClosed;
+			return state.isCurrentOpen ? state.accordionButtonOpened : state.accordionButtonClosed;
 
+		},
+		get isCurrentOpen() {
+			const context = getContext();
+			return state.openAccordionID === context.currentAccordionID;
 		}
 	},
 	actions: {
 		toggleAccordion() {
 			const context = getContext();
-			context.isCurrentOpen = !context.isCurrentOpen;
+			state.openAccordionID = state.openAccordionID === context.currentAccordionID ? null : context.currentAccordionID;
 		},
 		/**
 		 * Best practices recommends wrapping certain methods in
