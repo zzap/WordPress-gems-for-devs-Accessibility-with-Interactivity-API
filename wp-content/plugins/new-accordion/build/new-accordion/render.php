@@ -10,47 +10,55 @@
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
 
+$title   = $attributes['title'] ?? __( 'Accordion title', 'new-accordion' );
+$content = $attributes['content'] ?? __( 'Accordion content', 'new-accordion' );
 // Generates a unique id for aria-controls.
-$unique_id = wp_unique_id( 'p-' );
+$accordion_id = wp_unique_id( 'accordion' );
 
 // Adds the global state.
 wp_interactivity_state(
 	'gems',
 	array(
-		'isDark'    => false,
-		'darkText'  => esc_html__( 'Switch to Light', 'new-accordion' ),
-		'lightText' => esc_html__( 'Switch to Dark', 'new-accordion' ),
-		'themeText'	=> esc_html__( 'Switch to Dark', 'new-accordion' ),
+		'openAccordionID'       => null,
+		'currentButton'         => "+",
+		'accordionButtonOpened' => "-",
+		'accordionButtonClosed' => "+",
 	)
+);
+
+$context = array(
+	'currentAccordionID' => $accordion_id,
 );
 ?>
 
-<div
-	<?php echo get_block_wrapper_attributes(); ?>
+<div 
+	<?php echo get_block_wrapper_attributes(); ?> 
 	data-wp-interactive="gems"
-	<?php echo wp_interactivity_data_wp_context( array( 'isOpen' => false ) ); ?>
-	data-wp-watch="callbacks.logIsOpen"
-	data-wp-class--dark-theme="state.isDark"
+	<?php echo wp_interactivity_data_wp_context( $context ); ?>
 >
-	<button
-		data-wp-on--click="actions.toggleTheme"
-		data-wp-text="state.themeText"
-	></button>
-
-	<button
-		data-wp-on--click="actions.toggleOpen"
-		data-wp-bind--aria-expanded="context.isOpen"
-		aria-controls="<?php echo esc_attr( $unique_id ); ?>"
-	>
-		<?php esc_html_e( 'Toggle', 'new-accordion' ); ?>
-	</button>
-
-	<p
-		id="<?php echo esc_attr( $unique_id ); ?>"
-		data-wp-bind--hidden="!context.isOpen"
-	>
-		<?php
-			esc_html_e( 'New accordion - hello from an interactive block!', 'new-accordion' );
-		?>
-	</p>
+	<div class="accordion-item">
+		<h3>
+			<button 
+				id="<?php echo esc_attr( $accordion_id ); ?>-button"
+				class="accordion-button"
+				aria-controls="<?php echo esc_attr( $accordion_id ); ?>-content"
+				data-wp-on--click="actions.toggleAccordion"
+				data-wp-bind--aria-expanded="state.isCurrentOpen"
+				data-wp-on--keydown="actions.handleKeyDown"
+			>
+				<span>
+					<?php echo wp_kses_post( $title ); ?>
+					<span aria-hidden="true" data-wp-text="state.currentButton"></span>			
+				</span>
+			</button>
+		</h3>
+		<div 
+			id="<?php echo esc_attr( $accordion_id ); ?>-content" 
+			class="accordion-content"
+			aria-labelledby="<?php echo esc_attr( $accordion_id ); ?>-button"
+			data-wp-bind--hidden="!state.isCurrentOpen"
+		>
+			<p><?php echo wp_kses_post( $content ); ?></p>
+		</div>
+	</div>
 </div>

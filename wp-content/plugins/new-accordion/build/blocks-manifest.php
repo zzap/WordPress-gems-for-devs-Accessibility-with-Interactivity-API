@@ -13,6 +13,16 @@ return array(
 		'example' => array(
 			
 		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => 'Accordion title'
+			),
+			'content' => array(
+				'type' => 'string',
+				'default' => 'Accordion content'
+			)
+		),
 		'supports' => array(
 			'interactivity' => true
 		),

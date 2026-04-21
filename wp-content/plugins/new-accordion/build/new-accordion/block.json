@@ -8,6 +8,16 @@
   "icon": "carrot",
   "description": "An interactive block with the Interactivity API.",
   "example": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Accordion title"
+    },
+    "content": {
+      "type": "string",
+      "default": "Accordion content"
+    }
+  },
   "supports": {
     "interactivity": true
   },
