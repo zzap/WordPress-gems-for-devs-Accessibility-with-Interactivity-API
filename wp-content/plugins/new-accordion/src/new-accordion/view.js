@@ -45,7 +45,7 @@ const { state } = store('gems', {
 				ArrowUp: (currentIndex - 1 + buttons.length) % buttons.length,
 			}[event.key];
 
-			if (targetIndex === undefined || currentIndex === -1) {
+			if (targetIndex === undefined || currentIndex < 0) {
 				return;
 			}
 
