@@ -16,41 +16,17 @@ $unique_id = wp_unique_id( 'p-' );
 // Adds the global state.
 wp_interactivity_state(
 	'gems',
-	array(
-		'isDark'    => false,
-		'darkText'  => esc_html__( 'Switch to Light', 'new-accordion' ),
-		'lightText' => esc_html__( 'Switch to Dark', 'new-accordion' ),
-		'themeText'	=> esc_html__( 'Switch to Dark', 'new-accordion' ),
-	)
+	array()
 );
+
+$context = [];
 ?>
 
 <div
 	<?php echo get_block_wrapper_attributes(); ?>
 	data-wp-interactive="gems"
-	<?php echo wp_interactivity_data_wp_context( array( 'isOpen' => false ) ); ?>
-	data-wp-watch="callbacks.logIsOpen"
-	data-wp-class--dark-theme="state.isDark"
+	<?php echo wp_interactivity_data_wp_context( $context ); ?>
 >
-	<button
-		data-wp-on--click="actions.toggleTheme"
-		data-wp-text="state.themeText"
-	></button>
 
-	<button
-		data-wp-on--click="actions.toggleOpen"
-		data-wp-bind--aria-expanded="context.isOpen"
-		aria-controls="<?php echo esc_attr( $unique_id ); ?>"
-	>
-		<?php esc_html_e( 'Toggle', 'new-accordion' ); ?>
-	</button>
 
-	<p
-		id="<?php echo esc_attr( $unique_id ); ?>"
-		data-wp-bind--hidden="!context.isOpen"
-	>
-		<?php
-			esc_html_e( 'New accordion - hello from an interactive block!', 'new-accordion' );
-		?>
-	</p>
 </div>
