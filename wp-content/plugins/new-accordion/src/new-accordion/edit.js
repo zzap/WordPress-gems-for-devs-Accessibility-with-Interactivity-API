@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -27,10 +27,22 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps();
+	const { title, content } = attributes;
 
 	return (
-		<p { ...blockProps }>
-			{ __( 'New accordion – hello from the editor!', 'new-accordion' ) }
-		</p>
+		<div { ...blockProps }>
+			<RichText
+				tagName="h3"
+				value={ title }
+				onChange={ ( value ) => setAttributes( { title: value } ) }
+				placeholder={ __( 'Accordion title' ) }
+			/>
+			<RichText
+				tagName="p"
+				value={ content }
+				onChange={ ( value ) => setAttributes( { content: value } ) }
+				placeholder={ __( 'Accordion content' ) }
+			/>
+		</div>
 	);
 }

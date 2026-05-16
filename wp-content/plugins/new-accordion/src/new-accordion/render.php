@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHP file to use when rendering the block type on the server to show on the front end.
  *
@@ -11,22 +12,52 @@
  */
 
 // Generates a unique id for aria-controls.
-$unique_id = wp_unique_id( 'p-' );
+$acc_id      = wp_unique_id('accordion-');
+$acc_title   = $attributes['title'] ?? __( 'Accordion title', 'new-accordion' );
+$acc_content = $attributes['content'] ?? __( 'Accordion content', 'new-accordion' );
 
 // Adds the global state.
 wp_interactivity_state(
 	'gems',
-	array()
+	array(
+		'currentButton' => '+',
+		'openedButton'  => '-',
+		'closedButton'  => '+',
+	)
 );
 
-$context = [];
+$context = [
+	'isExpanded' => false,
+];
 ?>
 
 <div
 	<?php echo get_block_wrapper_attributes(); ?>
 	data-wp-interactive="gems"
-	<?php echo wp_interactivity_data_wp_context( $context ); ?>
->
+	<?php echo wp_interactivity_data_wp_context($context); ?>>
 
-
+	<div class="accordion-item">
+		<h3>
+			<button
+				id="<?php echo esc_attr( $acc_id ); ?>-button" 
+				aria-controls="<?php echo esc_attr( $acc_id ); ?>-content" 
+				class="accordion-button"
+				data-wp-bind--aria-expanded="context.isExpanded"
+				data-wp-on--click="actions.toggleAccordion"
+				data-wp-on--keydown="actions.keyboardSupport"
+			>
+				<span><?php echo wp_kses_post( $acc_title ); ?></span>
+				<span class="accordion-icon" data-wp-text="state.currentButton"></span>
+			</button>
+		</h3>
+		<div 
+			role="region"
+			aria-labelledby="<?php echo esc_attr( $acc_id ); ?>-button"
+			id="<?php echo esc_attr( $acc_id ); ?>-content" 
+			class="accordion-content"
+			data-wp-bind--hidden="!context.isExpanded"
+		>
+			<p><?php echo wp_kses_post( $acc_content ); ?></p>
+		</div>
+	</div>
 </div>

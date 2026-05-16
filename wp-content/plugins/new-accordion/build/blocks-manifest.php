@@ -16,6 +16,16 @@ return array(
 		'supports' => array(
 			'interactivity' => true
 		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => 'Accordion title'
+			),
+			'content' => array(
+				'type' => 'string',
+				'default' => 'Accordion content'
+			)
+		),
 		'textdomain' => 'new-accordion',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
