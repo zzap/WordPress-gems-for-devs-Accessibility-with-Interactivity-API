@@ -4,7 +4,7 @@ Repository for code examples and resources used in the "WordPress gems for devs:
 
 | Event  | Date | Branch | Links |
 | --- | --- | --- | --- |
-| WordCamp Portugal | 16 May 2026 | [conf/WordCampPortugal2026](https://github.com/zzap/WordPress-gems-for-devs-HTML-API/tree/conf/WordCampPortugal2026) | [Event](https://portugal.wordcamp.org/2026/session/wordpress-gems-for-devs-accessibility-with-interactivity-api/) \| [Slides](https://docs.google.com/presentation/d/179W5g7vIfEnMR5u-4RO-94UCPHZmEKg80qmROmNYKU0/edit?usp=sharing) |
+| WordCamp Portugal | 16 May 2026 | [conf/WordCampPortugal2026](https://github.com/zzap/WordPress-gems-for-devs-Accessibility-with-Interactivity-API/tree/conf/WordCampPortugal2026) | [Event](https://portugal.wordcamp.org/2026/session/wordpress-gems-for-devs-accessibility-with-interactivity-api/) \| [Slides](https://docs.google.com/presentation/d/179W5g7vIfEnMR5u-4RO-94UCPHZmEKg80qmROmNYKU0/edit?usp=sharing) |
 
 ## Interactivity API
 
