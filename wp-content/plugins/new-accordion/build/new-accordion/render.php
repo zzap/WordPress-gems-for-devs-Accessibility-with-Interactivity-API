@@ -20,14 +20,15 @@ $acc_content = $attributes['content'] ?? __( 'Accordion content', 'new-accordion
 wp_interactivity_state(
 	'gems',
 	array(
-		'currentButton' => '+',
-		'openedButton'  => '-',
-		'closedButton'  => '+',
+		'currentButton'     => '+',
+		'openedButton'      => '-',
+		'closedButton'      => '+',
+		'openedAccordionID' => null,
 	)
 );
 
 $context = [
-	'isExpanded' => false,
+	'currentAccordionID' => $acc_id,
 ];
 ?>
 
@@ -42,7 +43,7 @@ $context = [
 				id="<?php echo esc_attr( $acc_id ); ?>-button" 
 				aria-controls="<?php echo esc_attr( $acc_id ); ?>-content" 
 				class="accordion-button"
-				data-wp-bind--aria-expanded="context.isExpanded"
+				data-wp-bind--aria-expanded="state.isExpanded"
 				data-wp-on--click="actions.toggleAccordion"
 				data-wp-on--keydown="actions.keyboardSupport"
 			>
@@ -55,7 +56,7 @@ $context = [
 			aria-labelledby="<?php echo esc_attr( $acc_id ); ?>-button"
 			id="<?php echo esc_attr( $acc_id ); ?>-content" 
 			class="accordion-content"
-			data-wp-bind--hidden="!context.isExpanded"
+			data-wp-bind--hidden="!state.isExpanded"
 		>
 			<p><?php echo wp_kses_post( $acc_content ); ?></p>
 		</div>

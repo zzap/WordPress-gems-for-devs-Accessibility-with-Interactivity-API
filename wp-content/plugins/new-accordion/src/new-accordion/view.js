@@ -6,14 +6,17 @@ import { store, getContext, withSyncEvent } from '@wordpress/interactivity';
 const { state } = store( 'gems', {
 	state: {
 		get currentButton() {
+			return state.isExpanded ? state.openedButton : state.closedButton;
+		},
+		get isExpanded() {
 			const context = getContext();
-			return context.isExpanded ? state.openedButton : state.closedButton;
+			return state.openedAccordionID === context.currentAccordionID;
 		}
 	},
 	actions: {
 		toggleAccordion() {
 			const context = getContext();
-			context.isExpanded = !context.isExpanded;
+			state.openedAccordionID = state.isExpanded ? null : context.currentAccordionID;
 		},
 		keyboardSupport: withSyncEvent((event) => {
 			const buttons = Array.from(
